@@ -11,11 +11,14 @@ button{
 input{
     border: 0;
     border-radius: 10px; 
+    padding: 7px;
 }
-
+#InpuTweather:focus{
+outline: 0;
+}
 #showResult{
-    height:150px;
-    width: 150px;
+    height:250px;
+    width: 250px;
     /* border: 1px solid black; */
     border-radius: 50%;
     background: radial-gradient(rgb(245, 245, 108),#EAE8EB);
@@ -25,4 +28,20 @@ input{
 .imGsize{
     height: 40px;
     width: 40px;
+}
+.air::before{
+    content: 'Breathability: ';
+}
+@media only screen and (max-width: 600px){
+	
+body{
+    height: 100vh;
+    background: url(./img/pexels-ian-beckley-2440061.jpg);
+}
+
+#showResult{
+    height:250px;
+    width: 250px;
+ 
+
 }
