@@ -30,9 +30,9 @@ function dataRec(data) {
     var coord = data.coord
     var lat = coord.lat
     var lon = coord.lon
-    var coordUrl = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+   
 
-    fetch(coordUrl)
+    fetch(`http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`)
         .then(res => res.json())
         .then(data => pollutionCheck(data))
     console.log(lat, lon)
@@ -50,6 +50,15 @@ function dataRec(data) {
     result.innerHTML = `<h1>${celsius}° Celcius</h1> <p>${district} </p> <br> <img class="imGsize" src='${iconUrl}'>`
 
 }
+
+function defaultWeather(){
+
+
+
+}
+
+
+
 function pollutionCheck(data) {
 
     var list = data.list[0]
@@ -58,7 +67,7 @@ function pollutionCheck(data) {
         var newP = document.createElement('p');
         newP.innerText = 'Very Bad';
         newP.classList = 'air';
-        newP.style.color='red'
+        newP.style.color = 'red'
         result.appendChild(newP);
 
 
@@ -67,28 +76,49 @@ function pollutionCheck(data) {
         var newP = document.createElement('p');
         newP.innerText = 'Poor';
         newP.classList = 'air';
-        newP.style.color='brown'
+        newP.style.color = 'brown'
         result.appendChild(newP);
     }
     if (aqi == 3) {
         var newP = document.createElement('p');
         newP.innerText = 'Moderate';
         newP.classList = 'air';
-        newP.style.color='blue'
+        newP.style.color = 'blue'
         result.appendChild(newP);
     }
     if (aqi == 2) {
         var newP = document.createElement('p');
         newP.innerText = 'Fair';
         newP.classList = 'air';
-        newP.style.color='lime'
+        newP.style.color = 'lime'
         result.appendChild(newP);
     }
     if (aqi == 1) {
         var newP = document.createElement('p');
         newP.innerText = 'good';
         newP.classList = 'air';
-        newP.style.color='green'
+        newP.style.color = 'green'
         result.appendChild(newP);
     }
 }
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        result.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function showPosition(position) {
+    // result.innerHTML = "Latitude: " + position.coords.latitude +
+        // "<br>Longitude: " + position.coords.longitude;
+
+        let lat=position.coords.latitude
+        let lon=position.coords.longitude
+        let coordUrl = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+        fetch(coordUrl)
+        .then(res=> res.json())
+        .then(data=> dataRec(data))
+}
+getLocation()
