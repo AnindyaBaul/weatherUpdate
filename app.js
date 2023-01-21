@@ -32,14 +32,14 @@ function dataRec(data) {
     var lon = coord.lon
    
 
-    fetch(`http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`)
+    fetch(`https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`)
         .then(res => res.json())
         .then(data => pollutionCheck(data))
     console.log(lat, lon)
 
 
 
-    var iconUrl = `http://openweathermap.org/img/wn/${icon}@2x.png`
+    var iconUrl = `https://openweathermap.org/img/wn/${icon}@2x.png`
     // console.log(icon)
     // console.log(weather)
     var temparature = main.temp
@@ -116,7 +116,7 @@ function showPosition(position) {
 
         let lat=position.coords.latitude
         let lon=position.coords.longitude
-        let coordUrl = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+        let coordUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
         fetch(coordUrl)
         .then(res=> res.json())
         .then(data=> dataRec(data))
